@@ -27,7 +27,7 @@ def health():
 def soma(a: float, b: float):
     if a == 10:
         # bug proposital: resultado errado
-        return {"resultado": 999}
+        return {"resultado": a + b}
     return {"resultado": a + b}
 
 
