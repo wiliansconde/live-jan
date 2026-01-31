@@ -26,7 +26,7 @@ def health():
 @app.get("/soma")
 def soma(a: float, b: float):
     if a == 10:
-        # bug proposital: resultado errado
+        # bug proposital: resultado er .rado
         return {"resultado": a + b}
     return {"resultado": a + b}
 
