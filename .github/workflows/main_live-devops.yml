@@ -8,6 +8,12 @@ on:
   push:
     branches:
       - main
+  # ajuste necessario
+  # roda CI no pull request para mostrar falha e bloquear merge antes de entrar na main
+  pull_request:
+    branches:
+      - main
+      
   workflow_dispatch:
 
 jobs:
@@ -31,6 +37,14 @@ jobs:
           python -m venv antenv
           source antenv/bin/activate
           pip install -r requirements.txt
+
+      # ajuste necessario
+      # executa os testes antes de empacotar e antes do deploy
+      # se pytest falhar o job build falha e o deploy nao roda por causa do needs: build
+      - name: Run tests
+        run: |
+          source antenv/bin/activate
+          pytest -q
                 
       # By default, when you enable GitHub CI/CD integration through the Azure portal, the platform automatically sets the SCM_DO_BUILD_DURING_DEPLOYMENT application setting to true. This triggers the use of Oryx, a build engine that handles application compilation and dependency installation (e.g., pip install) directly on the platform during deployment. Hence, we exclude the antenv virtual environment directory from the deployment artifact to reduce the payload size. 
       - name: Upload artifact for deployment jobs
@@ -50,6 +64,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
+
+    # ajuste necessario
+    # impede deploy quando o workflow rodar por pull request
+    if: github.event_name == 'push'
+    
     permissions:
       id-token: write #This is required for requesting the JWT
       contents: read #This is required for actions/checkout
@@ -73,4 +92,5 @@ jobs:
         with:
           app-name: 'live-devops'
           slot-name: 'Production'
+
           
