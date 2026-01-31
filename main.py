@@ -13,9 +13,9 @@ logging.basicConfig(
 
 @app.get("/")
 def root():
-    logger.info("v05 Endpoint root chamado")
+    logger.info("v06 Endpoint root chamado")
     return {
-        "message": "v05 API de Calculadora no ar",
+        "message": "v06 API de Calculadora no ar",
         "operations": ["soma", "subtracao", "multiplicacao", "divisao"]
     }
 
