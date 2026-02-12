@@ -13,9 +13,9 @@ logging.basicConfig(
 
 @app.get("/")
 def root():
-    logger.info("v08 Endpoint root chamado")
+    logger.info("v10 Endpoint root chamado")
     return {
-        "message": "v08 API de Calculadora no ar",
+        "message": "v10 API de Calculadora no ar",
         "operations": ["soma", "subtracao", "multiplicacao", "divisao"]
     }
 
@@ -25,9 +25,9 @@ def health():
 
 @app.get("/soma")
 def soma(a: float, b: float):
-    if a == 10:
+    #if a == 10:
         # bug proposital: resultado er .rado
-        return {"resultado": 333}
+    #    return {"resultado": 333}
     return {"resultado": a + b}
 
 
