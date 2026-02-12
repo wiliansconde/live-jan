@@ -26,9 +26,9 @@ def health():
 @app.get("/soma")
 def soma(a: float, b: float):
     #logger.info("--- Chamando SOMA: param a=" + str(a) + " ===> b=" + str(b) )
-    if a == 10:
+    #if a == 10:
          #bug proposital: resultado er .rado
-        return {"resultado": 999}
+        #return {"resultado": 999}
     return {"resultado": a + b}
 
 
